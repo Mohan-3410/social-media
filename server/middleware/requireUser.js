@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { error } = require('../utils/responseWrapper');
+const User = require('../models/User');
 
 module.exports = async (req, res, next) => {
     if (!req.headers || !req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
@@ -10,6 +11,10 @@ module.exports = async (req, res, next) => {
         const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_PRIVATE_KEY)
         req._id=decoded._id;
         
+        const user = await User.findById(req._id);
+        if (!user) {
+            return res.send(error(404,'user not found'));
+        }
         next();
     } catch (e) {
         console.error({message: e.message});

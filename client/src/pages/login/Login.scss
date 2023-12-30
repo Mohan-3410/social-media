@@ -47,7 +47,9 @@
         margin-bottom: 0.5rem;
         // border: 1px solid var(--color-dark-variant);
         border-radius: var(--border-radius-1);
-        background-color: var(--color-background);
+        background-color: var(--color-white);
+        box-shadow: 0px 0px 0px var(--color-background),
+          inset 3px 3px 3px var(--color-background);
         color: var(--color-dark);
         &:focus {
           outline: none;
@@ -55,6 +57,7 @@
         }
 
         &:nth-last-child(1) {
+          box-shadow: none;
           margin-top: 1rem;
           margin-bottom: 0;
         }
@@ -84,22 +87,21 @@
 // Your existing styles...
 
 @media only screen and (max-width: 768px) {
-    .Login {
-      .login-box {
-        width: 80%;
-      }
+  .Login {
+    .login-box {
+      width: 80%;
     }
   }
-  
-  @media only screen and (max-width: 480px) {
-    .Login {
-      .h2 {
-        font-size: 1.5rem;
-      }
-  
-      .login-box {
-        width: 90%;
-      }
+}
+
+@media only screen and (max-width: 480px) {
+  .Login {
+    .h2 {
+      font-size: 1.5rem;
+    }
+
+    .login-box {
+      width: 90%;
     }
   }
-  
+}
