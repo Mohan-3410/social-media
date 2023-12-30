@@ -1,0 +1,29 @@
+
+
+.App {
+  transition: background-color 0.3s ease;
+
+  &.dark-mode {
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+  }
+  .dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--color-dark);
+  
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+  
+}
+
+
