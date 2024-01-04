@@ -1,0 +1,91 @@
+.Profile {
+  background-color: var(--color-background);
+  height: calc(100vh - 4.6rem);
+  padding: var(--card-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    display: grid;
+    width: 80%;
+    gap: 1.8rem;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .left-part {
+    height: calc(100vh - 4.6rem);
+    overflow-y: auto;
+    padding-top: 2rem;
+    padding-right: 1rem;
+
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
+  }
+
+  .right-part {
+    height: calc(100vh - 4.6rem);
+    padding-top: 2rem;
+    
+    .profile-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-white);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 2rem;
+        gap: 1rem;
+        
+        .profile-img{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 8.5rem;
+          width: 8.5rem;
+        }
+        img {
+          height: 8.5rem;
+          object-fit: cover;
+          border-radius: 50%;
+          box-shadow: var(--box-shadow);
+          padding: 5px;
+          
+        }
+    
+        .user-name {
+          font-size: 1.4rem;
+          color: var(--color-primary);
+        }
+    
+        .follower-info, .buttons {
+          display: flex;
+          justify-content: space-around;
+          gap: 2rem;
+            
+          h4 {
+            color: var(--color-dark);
+            font-size: 1rem;
+          }
+        }
+
+    
+        .follow, .update-profile {
+          padding: 0.7rem;
+          background-color: var(--color-primary);
+          color: var(--color-white);
+          border: none;
+
+          border-radius: var(--border-radius-1);
+          cursor: pointer;
+    
+          &:hover {
+            background-color: var(--color-dark);
+            color: var(--color-primary);
+          }
+        }
+      }
+  }
+}

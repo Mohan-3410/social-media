@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import './App.scss';
 import Login from './pages/login/Login';
@@ -6,6 +6,12 @@ import { Routes, Route } from 'react-router-dom';
 import Signup from './pages/signup/Signup';
 import Home from './pages/home/Home';
 import RequireUser from './components/RequireUser';
+import Feed from './components/feed/Feed';
+import Profile from './components/profile/Profile';
+import UpdateProfile from './components/updateProfile/UpdateProfile';
+import { useSelector } from 'react-redux';
+import LoadingBar from 'react-top-loading-bar';
+import IfLogin from './components/IfLogin';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -14,20 +20,39 @@ function App() {
     setDarkMode(!darkMode);
   };
 
+  const { isLoading } = useSelector(state => state.appConfigReducer)
+  const loadingRef = useRef(null)
+
+  useEffect(() => {
+    if (isLoading) {
+      loadingRef.current.continuousStart();
+    }
+    else {
+      loadingRef.current.complete();
+    }
+  }, [isLoading])
+
   return (
     <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
       <div className="dark-mode-toggle" onClick={toggleDarkMode}>
         {darkMode ? <FaSun /> : <FaMoon />}
       </div>
+      <LoadingBar color='#7380ec' ref={loadingRef} />
       <Routes>
         <Route element={<RequireUser />}>
-          <Route path='/' element={<Home />} />
+          <Route element={<Home />}>
+            <Route path='/' element={<Feed />} />
+            <Route path='/profile/:userId' element={<Profile />} />
+            <Route path="/updateProfile" element={<UpdateProfile />} />
+          </Route>
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<IfLogin />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
       </Routes>
     </div>
-  ); 
+  );
 }
 
 export default App;
