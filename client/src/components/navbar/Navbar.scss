@@ -1,18 +1,18 @@
 // Navbar.scss
 
 .Navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--card-padding);
-    background: var(--color-white);
-    height: 4.6rem;
-    width: 100%;
-    margin: 0;
-    box-shadow: 0 1rem 1rem var(--color-light);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--card-padding);
+  background: var(--color-white);
+  height: 4.6rem;
+  width: 100%;
+  margin: 0;
+  box-shadow: 0 1rem 1rem var(--color-light);
 
   .container {
     display: flex;
@@ -20,22 +20,22 @@
     justify-content: space-between;
     align-items: center;
 
-    .right-side{
+    .right-side {
+      display: flex;
+      gap: 1rem;
+
+      .logout {
         display: flex;
-        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        cursor: pointer;
+        color: var(--color-primary);
 
-        .logout{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            cursor: pointer;
-            color: var(--color-primary);
-
-            &:hover{
-                color: var(--color-dark);
-            }
+        &:hover {
+          color: var(--color-dark);
         }
+      }
     }
   }
 
@@ -44,5 +44,13 @@
     color: var(--color-primary);
     font-weight: 800;
     cursor: pointer;
+  }
+}
+@media screen and (max-width: 768px) {
+  .Navbar {
+    padding: 0.5rem;
+    .container{
+      width: 100%;
+    }
   }
 }

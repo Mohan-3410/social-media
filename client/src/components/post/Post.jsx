@@ -1,22 +1,14 @@
 import React from 'react'
 import "./Post.scss"
 import Avatar from '../avatar/Avatar'
-import dummyImg from "../../assets/dummyImg.png"
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai"
 import { useDispatch } from 'react-redux'
 import { likeAndUnlikePost } from '../../redux/slices/postSlice'
-import { TOAST_SUCCESS } from '../../App'
-import { showToast } from '../../redux/slices/appConfigSlice'
 
 function Post({post}) {
     
     const dispatch = useDispatch();
     async function handlePostLiked(){
-        dispatch(showToast({
-            type: TOAST_SUCCESS,
-            message: 'Liked or unliked'
-        }))
-
         dispatch(likeAndUnlikePost({
             postId: post._id
         }))
