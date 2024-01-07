@@ -5,7 +5,6 @@ import dummyImg from "../../assets/dummyImg.png"
 import { BsCardImage } from "react-icons/bs"
 import { axiosClient } from '../../utils/axiosClient'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading } from '../../redux/slices/appConfigSlice'
 import { getUserProfile } from '../../redux/slices/postSlice'
 import { useParams } from 'react-router-dom'
 function CreatePost() {
@@ -29,7 +28,6 @@ function CreatePost() {
 
     const handlePostSubmit = async() => {
         try {
-            dispatch(setLoading(true));
             const result = await axiosClient.post('/posts', {
                 caption, postImg
             })
@@ -38,7 +36,6 @@ function CreatePost() {
         } catch (error) {
             
         } finally {
-            dispatch(setLoading(false));
             setCaption('');
             setPostImg(null); 
         }
@@ -46,7 +43,7 @@ function CreatePost() {
     return (
         <div className="CreatePost">
             <div className="left">
-                <Avatar />
+                <Avatar id={params.userId} src={myProfile?.avatar?.url}/>
             </div>
             <div className="right">
                 <input value={caption} type="text" className='captionInput' onChange={(e)=>setCaption(e.target.value)} />

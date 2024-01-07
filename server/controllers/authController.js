@@ -110,7 +110,7 @@ const generateRefreshToken = (user) => {
 const generateAccessToken = (user) => {
     try {
         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_PRIVATE_KEY, {
-            expiresIn: '1d'
+            expiresIn: '15m'
         })
         console.log("AccessToken : ", accessToken);
         return accessToken;

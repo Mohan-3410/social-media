@@ -5,16 +5,24 @@ import Avatar from '../avatar/Avatar'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading } from '../../redux/slices/appConfigSlice'
+import { axiosClient } from '../../utils/axiosClient'
+import { KEY_ACCESS_TOKEN, removeItem } from '../../utils/localStroageManager'
 
 function Navbar() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { myProfile } = useSelector(state => state.appConfigReducer)
 
-    function handleLogout(){
-
+    async function handleLogout(){
+        try {
+            await axiosClient.post('/auth/logout');
+            removeItem(KEY_ACCESS_TOKEN);
+            navigate("/login");
+        } catch (e) {
+            
+        }
     }
+    console.log({myProfile})
     return (
         <nav className="Navbar">
             <div className="container">
@@ -23,8 +31,8 @@ function Navbar() {
                     <div className="logout" onClick={handleLogout}>
                         <AiOutlineLogout />
                     </div>
-                    <div className="profile-photo" onClick={()=>navigate(`/profile/${myProfile?._id}`)}>
-                        <Avatar src={myProfile?.avatar?.url}/>
+                    <div className="profile-photo">
+                        <Avatar id={myProfile._id} src={myProfile?.avatar?.url}/>
                     </div>
                 </div>
             </div>

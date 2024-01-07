@@ -1,27 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosClient } from "../../utils/axiosClient";
 
-export const getMyInfo = createAsyncThunk("user/getMyInfo", async (_, thunkAPI) => {
-    try {
-        thunkAPI.dispatch(setLoading(true));
+export const getMyInfo = createAsyncThunk("user/getMyInfo", async () => {
+    try { 
         const data = await axiosClient.get('/user/getMyInfo');
         return data.result;
     } catch (e) {
         return Promise.reject(e);
-    } finally {
-        thunkAPI.dispatch(setLoading(true));
     }
 })
 
-export const updateMyProfile = createAsyncThunk("user/updateMyProfile", async (body, thunkAPI) => {
+export const updateMyProfile = createAsyncThunk("user/updateMyProfile", async (body) => {
     try {
-        thunkAPI.dispatch(setLoading(true));
         const data = await axiosClient.put('/user/', body);
         return data.result;
     } catch (e) {
         return Promise.reject(e);
-    } finally {
-        thunkAPI.dispatch(setLoading(true));
     }
 });
 
@@ -29,11 +23,15 @@ const appConfigSlicer = createSlice({
     name: 'appConfigSlicer',
     initialState: {
         isLoading: false,
-        myProfile: {}
+        myProfile: {},
+        toastData: {}
     },
     reducers: {
         setLoading: (state, action) => {
             state.isLoading = action.payload
+        },
+        showToast: (state,action) => {
+            state.toastData = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -48,4 +46,4 @@ const appConfigSlicer = createSlice({
 })
 
 export default appConfigSlicer.reducer;
-export const { setLoading } = appConfigSlicer.actions;
+export const { setLoading, showToast} = appConfigSlicer.actions;

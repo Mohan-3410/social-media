@@ -1,45 +1,66 @@
 import axios from "axios"
 import { KEY_ACCESS_TOKEN, getItem, removeItem, setItem } from "./localStroageManager"
 
+import store from '../redux/store.js'
+import { TOAST_FAILURE } from "../App";
+import { setLoading, showToast } from "../redux/slices/appConfigSlice";
+import { AiOutlineConsoleSql } from "react-icons/ai";
+
 export const axiosClient = axios.create({
     baseURL: import.meta.env.VITE_SERVER_BASE_URL,
     withCredentials: true
 })
 
-axiosClient.interceptors.request.use((request)=>{
-    console.log("request", request);
+axiosClient.interceptors.request.use((request) => { 
     const accessToken = getItem(KEY_ACCESS_TOKEN);
-    console.log({accessToken})
     request.headers['Authorization'] = `Bearer ${accessToken}`
-    console.log("request access token", accessToken);
+    store.dispatch(setLoading(true));
     return request;
 });
 
-axiosClient.interceptors.response.use(async(response)=>{
+axiosClient.interceptors.response.use(async (response) => {
+    store.dispatch(setLoading(false));
     const data = response.data;
     console.log("response", response);
-    if(data.status === "ok"){
+    if (data.status === "ok") {
         return data
     }
 
     const originalRequest = response.config;
     const statusCode = data.statusCode;
     const message = data.message
+
+    if(message !== "invalid access key"){
+        store.dispatch(showToast({
+            type: TOAST_FAILURE,
+            message
+        }));
+    }
     
-    if(statusCode===401 && originalRequest.url === "/auth/refresh"){
+
+    if (statusCode === 401 && originalRequest.url === "/auth/refresh") {
         removeItem(KEY_ACCESS_TOKEN);
         window.location.replace('/login/', '_self');
         return Promise.reject(message);
+        
     }
-    if(statusCode===401){
+    if (statusCode === 401) { 
         const data = await axiosClient.get('/auth/refresh');
         console.log("data", data);
-        if(data.status==='ok'){
+        if (data.status === 'ok') {
             const accessToken = data.result.accessToken;
             setItem(KEY_ACCESS_TOKEN, accessToken);
             originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-            return axios(originalRequest)
+            originalRequest._retry = true;
+            return axiosClient(originalRequest)
         }
     }
     return Promise.reject(message);
+}, async (error) => {
+    store.dispatch(setLoading(false));
+    store.dispatch(showToast({
+        type: TOAST_FAILURE,
+        message: error.message
+    }))
+    return Promise.reject(error);
 });

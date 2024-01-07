@@ -19,7 +19,7 @@ function Follower({user}) {
     return (
         <div className="Follower">
             <div className="userInfo">
-                <Avatar src={user?.avatar?.url}/>
+                <Avatar id={user._id}  src={user?.avatar?.url}/>
                 <h4 className="name">{user?.name}</h4>
             </div>
             <button onClick={handleUserFollow} className="follow-link">{isFollowing ? "Unfollow" : "Follow"}</button>

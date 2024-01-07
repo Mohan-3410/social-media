@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import "./Signup.scss"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { axiosClient } from '../../utils/axiosClient';
 
 function Signup() {
     const [name,setName] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axiosClient.post('/auth/signup', { name, email, password })
-            console.log("signup success", result);
+            await axiosClient.post('/auth/signup', { name, email, password })
+            navigate("/login")
         } catch (error) {
             console.error({ message: error.message })
         }
