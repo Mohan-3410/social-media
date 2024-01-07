@@ -51,9 +51,7 @@ const getPostsOfFollowingController = async (req, res) => {
             }
         }).populate('owner');
 
-        console.log({fullPosts})
         const posts = fullPosts.map(post => mapPostOutput(post, req._id)).reverse();
-        console.log(posts)
         const followingsIds = currentUser.followings.map(item => item._id);
         followingsIds.push(currentUserId);
         const suggestion = await User.find({

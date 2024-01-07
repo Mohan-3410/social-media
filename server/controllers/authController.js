@@ -100,7 +100,6 @@ const generateRefreshToken = (user) => {
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_PRIVATE_KEY, {
             expiresIn: '1y'
         })
-        console.log("refreshToken : ", refreshToken)
         return refreshToken;
     } catch (e) {
         console.error({ message: e.message })
@@ -112,7 +111,6 @@ const generateAccessToken = (user) => {
         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_PRIVATE_KEY, {
             expiresIn: '15m'
         })
-        console.log("AccessToken : ", accessToken);
         return accessToken;
     } catch (e) {
         console.error({ message: e.message });

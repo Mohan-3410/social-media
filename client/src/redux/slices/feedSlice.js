@@ -5,7 +5,6 @@ import { likeAndUnlikePost } from "./postSlice";
 export const getFeedData = createAsyncThunk("user/getFeedData", async () => {
     try {
         const data = await axiosClient.get('/user/getFeedData');
-        console.log("feed data", data);
         return data.result;
     } catch (e) {
         return Promise.reject(e);
@@ -14,7 +13,6 @@ export const getFeedData = createAsyncThunk("user/getFeedData", async () => {
 export const followAndUnfollowUser = createAsyncThunk("user/followAndUnfollow", async (body)=>{
     try {
        const data = await axiosClient.post('/user/follow', body);
-        console.log("follow or unfollow user", data);
         return data.result.user;
     } catch (e) {
         return Promise.reject(e);

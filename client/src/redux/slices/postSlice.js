@@ -4,7 +4,6 @@ import { axiosClient } from "../../utils/axiosClient";
 export const getUserProfile = createAsyncThunk("user/getUserProfile", async (body) => {
     try {
         const data = await axiosClient.post('/user/getUserProfile', body);
-        console.log(data);
         return data.result;
     } catch (e) {
         return Promise.reject(e);
@@ -14,7 +13,6 @@ export const getUserProfile = createAsyncThunk("user/getUserProfile", async (bod
 export const likeAndUnlikePost =  createAsyncThunk('post/likeAndUnlike', async (body)=>{
     try {
         const data = await axiosClient.post('/posts/like', body);
-        console.log(data);
         return data.result.post;
     } catch (e) {
         return Promise.reject(e);

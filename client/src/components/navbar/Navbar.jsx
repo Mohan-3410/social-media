@@ -22,7 +22,6 @@ function Navbar() {
             
         }
     }
-    console.log({myProfile})
     return (
         <nav className="Navbar">
             <div className="container">

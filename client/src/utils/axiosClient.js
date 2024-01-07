@@ -4,10 +4,9 @@ import { KEY_ACCESS_TOKEN, getItem, removeItem, setItem } from "./localStroageMa
 import store from '../redux/store.js'
 import { TOAST_FAILURE } from "../App";
 import { setLoading, showToast } from "../redux/slices/appConfigSlice";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export const axiosClient = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_BASE_URL,
+    baseURL: import.meta.env.VITE_SERVER_BASE_URL || "http://localhost:3000",
     withCredentials: true
 })
 
@@ -21,7 +20,6 @@ axiosClient.interceptors.request.use((request) => {
 axiosClient.interceptors.response.use(async (response) => {
     store.dispatch(setLoading(false));
     const data = response.data;
-    console.log("response", response);
     if (data.status === "ok") {
         return data
     }
@@ -46,7 +44,6 @@ axiosClient.interceptors.response.use(async (response) => {
     }
     if (statusCode === 401) { 
         const data = await axiosClient.get('/auth/refresh');
-        console.log("data", data);
         if (data.status === 'ok') {
             const accessToken = data.result.accessToken;
             setItem(KEY_ACCESS_TOKEN, accessToken);

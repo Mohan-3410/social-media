@@ -17,7 +17,6 @@ function CreatePost() {
     function handleImageChange(e) {
         const file = e.target.files[0];
         const reader = new FileReader();
-        console.log({file, reader})
         if (file) {
             reader.onloadend = () => {
                 setPostImg(reader.result);
@@ -31,7 +30,6 @@ function CreatePost() {
             const result = await axiosClient.post('/posts', {
                 caption, postImg
             })
-            console.log('postImg', result);
             dispatch(getUserProfile({userId: myProfile._id}))
         } catch (error) {
             

@@ -38,7 +38,6 @@ function App() {
   }, [isLoading])
 
   useEffect(() => {
-    console.log("Toast data:", toastData)
     switch (toastData.type) {
       case TOAST_SUCCESS:
         toast.success(toastData.message);

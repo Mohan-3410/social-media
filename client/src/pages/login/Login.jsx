@@ -15,7 +15,6 @@ function Login() {
         e.preventDefault();
         try {
             const data = await axiosClient.post('/auth/login', { email, password })
-            console.log("login success", data);
             setItem(KEY_ACCESS_TOKEN, data.result.accessToken);
             navigate('/')
         } catch (error) {

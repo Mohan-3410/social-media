@@ -37,7 +37,6 @@ const likeAndUnlikePostController = async (req, res) => {
     try {
         const { postId } = req.body;
         const currentUserId = req._id;
-        console.log(req._id)
 
         const post = await Post.findById(postId).populate('owner');
         if (!post) {

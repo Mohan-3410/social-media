@@ -12,12 +12,10 @@ function Post({post}) {
     
     const dispatch = useDispatch();
     async function handlePostLiked(){
-        console.log("showing toaster")
         dispatch(showToast({
             type: TOAST_SUCCESS,
             message: 'Liked or unliked'
         }))
-        console.log("not showing toaster")
 
         dispatch(likeAndUnlikePost({
             postId: post._id
