@@ -5,9 +5,12 @@ import store from '../redux/store.js'
 import { TOAST_FAILURE } from "../App";
 import { setLoading, showToast } from "../redux/slices/appConfigSlice";
 
+const baseURL = import.meta.env.MODE === 'development'
+  ? 'http://localhost:3000' 
+  : import.meta.env.VITE_SERVER_BASE_URL; 
 
 export const axiosClient = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_BASE_URL,
+    baseURL,
     withCredentials: true
 })
 
