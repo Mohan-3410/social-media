@@ -24,6 +24,7 @@
     }
 
     .create-post-button {
+      z-index: 0;
       background-color: transparent;
       border: 2px dashed var(--color-primary);
       display: flex;

@@ -39,12 +39,12 @@ function Profile() {
         <div className="Profile">
             <div className="container">
                 <div className="left-part">
-                    <div className="create-post-button" style={!isVisible ? {display: "flex"}: {display:"none"}} onClick={handleCreatePostClick}>
+                    {isMyProfile && <div className="create-post-button" style={!isVisible ? {display: "flex"}: {display:"none"}} onClick={handleCreatePostClick}>
                         <div>
                             <span class="material-icons-sharp">add</span>
                             <h3>Create Post</h3>
                         </div>
-                    </div>
+                    </div>}
                     {isMyProfile && isVisible && <CreatePost isVisible={handleCreatePostClick}/>}
                     {userProfile?.posts?.map(post => <Post key={post._id} post={post} />)}
                 </div>

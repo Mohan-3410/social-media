@@ -9,19 +9,7 @@
     --color-light: rgba(0, 0, 0, 0.4);
     --box-shadow: 0 2rem 3rem var(--color-light);
   }
-  .dark-mode-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    font-size: 24px;
-    color: var(--color-dark);
-    z-index: 100;
-
-    &:hover {
-      color: var(--color-primary);
-    }
-  }
+  
 }
 @media screen and (max-width: 768px) {
   .App {

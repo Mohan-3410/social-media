@@ -18,10 +18,11 @@ export const TOAST_SUCCESS = 'toast_success';
 export const TOAST_FAILURE = 'toast_failure';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+    localStorage.setItem('darkMode',darkMode);
   };
 
   const { isLoading } = useSelector(state => state.appConfigReducer)
@@ -49,7 +50,7 @@ function App() {
   }, [toastData])
 
   return (
-    <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
+    <div className={`App ${localStorage.getItem('darkMode')==="true" ? 'dark-mode' : ''}`}>
       <div className="dark-mode-toggle" onClick={toggleDarkMode}>
         {darkMode ? <FaSun /> : <FaMoon />}
       </div>
@@ -57,7 +58,7 @@ function App() {
       <div><Toaster /></div>
       <Routes>
         <Route element={<RequireUser />}>
-          <Route element={<Home />}>
+          <Route element={<Home darkMode={darkMode} onClick={toggleDarkMode}/>}>
             <Route path='/' element={<Feed />} />
             <Route path='/profile/:userId' element={<Profile />} />
             <Route path="/updateProfile" element={<UpdateProfile />} />

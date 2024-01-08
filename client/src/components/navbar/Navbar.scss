@@ -1,6 +1,7 @@
 // Navbar.scss
 
 .Navbar {
+  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
@@ -23,6 +24,19 @@
     .right-side {
       display: flex;
       gap: 1rem;
+
+      .dark-mode-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 2.2rem;
+        color: var(--color-dark);
+    
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
 
       .logout {
         display: flex;

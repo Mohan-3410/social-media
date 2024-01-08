@@ -6,14 +6,14 @@ import { Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getMyInfo } from '../../redux/slices/appConfigSlice';
 
-function Home() {
+function Home({darkMode, onClick}) {
     const dispatch = useDispatch();
     useEffect(()=>{
         dispatch(getMyInfo());
     },[])
     return (
         <div className="Home">
-            <Navbar />
+            <Navbar darkMode={darkMode} onClick={onClick}/>
             <Outlet />
         </div>
 
