@@ -51,9 +51,7 @@ function App() {
 
   return (
     <div className={`App ${localStorage.getItem('darkMode')==="true" ? 'dark-mode' : ''}`}>
-      <div className="dark-mode-toggle" onClick={toggleDarkMode}>
-        {darkMode ? <FaSun /> : <FaMoon />}
-      </div>
+      
       <LoadingBar color='#7380ec' ref={loadingRef} />
       <div><Toaster /></div>
       <Routes>
