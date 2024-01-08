@@ -40,8 +40,6 @@
       }
     }
     img {
-    //   width: 10rem;
-    //   height: 10rem;
       border-radius: 50%;
       cursor: pointer;
       object-fit: cover;
@@ -114,6 +112,19 @@
       &:hover {
         background-color: var(--color-dark);
       }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .UpdateProfile {
+
+    .container {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .right-part{
+      padding: 0;
     }
   }
 }

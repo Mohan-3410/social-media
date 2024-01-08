@@ -7,7 +7,7 @@ import { axiosClient } from '../../utils/axiosClient'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile } from '../../redux/slices/postSlice'
 import { useParams } from 'react-router-dom'
-function CreatePost() {
+function CreatePost({isVisible}) {
     const [postImg, setPostImg] = useState('');
     const [caption, setCaption] = useState("");
     const { myProfile } = useSelector(state => state.appConfigReducer)
@@ -35,11 +35,13 @@ function CreatePost() {
             
         } finally {
             setCaption('');
-            setPostImg(null); 
+            setPostImg(null);
+            isVisible();
         }
+
     }
     return (
-        <div className="CreatePost">
+        <div className={`CreatePost`}>
             <div className="left">
                 <Avatar id={params.userId} src={myProfile?.avatar?.url}/>
             </div>
